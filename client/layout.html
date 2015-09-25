@@ -1,0 +1,21 @@
+<template name='layout'>
+  <div class="ui sidebar inverted vertical menu">
+   <a class="item">
+     1st Item
+   </a>
+   <a class="item">
+     2nd Item
+   </a>
+   <a class="item">
+     3rd Item
+   </a>
+ </div>
+  <div class='ui pusher'>
+    <div class='ui container'>
+      {{> header}}
+      <div class='ui horizontal divider'>
+      </div>
+      {{> yield}}
+    </div>
+  </div>
+</template>

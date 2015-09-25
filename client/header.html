@@ -1,0 +1,29 @@
+<template name='header'>
+    <div class="ui menu">
+    <div class="header item">
+      <a href="{{pathFor 'home'}}">Pooler Inc.</a>
+    </div>
+    {{#if currentUser}}
+      <a class='item' href="{{pathFor 'newPool'}}">
+        <i class='plus icon'></i>
+      </a>
+    {{/if}}
+    <div class='right menu'>
+      <a class="item">
+        Pools
+      </a>
+      <a class="item" href="{{pathFor 'aboutUs'}}">
+        About Us
+      </a>
+    {{#if currentUser}}
+      <a class='item' href="{{pathFor 'profilePage'}}">
+        Profile
+      </a>
+    {{/if}}
+      <a class='item toggleSidebar'>
+        <i class='sidebar icon'></i>
+      </a>
+      {{> loginButtons}}
+    </div>
+    </div>
+</template>

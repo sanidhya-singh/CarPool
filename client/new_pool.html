@@ -1,0 +1,47 @@
+<template name='newPool'>
+  <div class='ui basic segment'>
+    <form class="ui form">
+      <h4 class="ui dividing header">Pool Information</h4>
+      <div class='ui grid'>
+        <div class='ui ten wide column'>
+          <div class="map-container">
+            {{> googleMap name="exampleMap" options=exampleMapOptions}}
+          </div>
+        </div>
+        <div class='ui six wide column' id='right-panel' style='max-height: 400px; overflow-y: scroll'>
+          Drag and Drop the marker to set your Desitnation
+        </div>
+      </div>
+      <h4 class='ui dividing header'>Trip Details</h4>
+      <div class='two fields'>
+        <div class='field' id='start-field'>
+          <label>Start</label>
+          <input id='start-box' />
+        </div>
+        <div class='field' id='end-field'>
+          <label>End</label>
+          <input id='end-box' />
+        </div>
+      </div>
+      <div class='two fields' id='people-field'>
+        <div class='field'>
+          <label>Number of Persons</label>
+          <input id='people-box' />
+        </div>
+        <div class='field' id='date-field'>
+          <label>Date of Travel</label>
+          <input class="ui dropdown datetimepicker" id='date-box' type="text"/>
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <input id='more-box' name="gift" type="checkbox">
+            <label>Are you willing to accomodate more?</label>
+          </div>
+        </div>
+      </div>
+      <input class='ui button' type='submit' value='Submit'/>
+    </form>
+  </div>
+</template>
