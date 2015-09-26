@@ -4,6 +4,7 @@ var directionsService;
 var globalMap;
 
 Template.homePageMap.onCreated(function() {
+  Session.set('mapReady', false);
   // We can use the `ready` callback to interact with the map API once the map is ready.
   GoogleMaps.ready('exampleMap', function(map) {
     Session.set('mapReady', true);
@@ -27,7 +28,7 @@ Template.homePageMap.helpers({
       // Map initialization options
       return {
         center: new google.maps.LatLng(-37.8136, 144.9631),
-        zoom: 14
+        zoom: 9
       };
     }
   },
@@ -35,8 +36,10 @@ Template.homePageMap.helpers({
     return Pools.find();
   },
   drawRoute: function(start, end) {
-    if(Session.get('mapReady'))
-      calculateAndDisplayRouteHomePage(start, end, globalMap);   
+    if(Session.get('mapReady')) {
+      calculateAndDisplayRouteHomePage(start, end, globalMap);
+      $('#home-page-loader').removeClass('active');
+    }
   }
 });
 
@@ -49,9 +52,30 @@ function calculateAndDisplayRouteHomePage(startLocation, endLocation, map) {
     travelMode: google.maps.TravelMode.DRIVING
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
+      //var path = response.routes[0].overview_path;
+      //drawPath(path, map);
       directionsDisplay.setDirections(response);
+      directionsDisplay.addListener('click', function(event) {
+        console.log('You clicked on a route');
+      });
     } else {
       window.alert('Directions request failed due to ' + status);
     }
   });
+}
+
+function drawPath(path, map) {
+  var pathOptions = {
+       path: path,
+       strokeColor: "#"+((1<<24)*Math.random()|0).toString(16),
+       strokeWeight: 5,
+       opacity: 0.00001,
+       map: map
+     }
+     if(Session.get('mapReady')) {
+      routePolyline = new google.maps.Polyline(pathOptions);
+      routePolyline.addListener('click', function(event) {
+        console.log('You clicked on a Polyline');
+      });
+    }
 }

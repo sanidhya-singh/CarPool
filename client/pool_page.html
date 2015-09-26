@@ -1,0 +1,62 @@
+<template name='poolPage'>
+  <div class='ui basic segment'>
+    <div class='ui grid'>
+      <div class='ui six wide center aligned column'>
+        <img class='ui small centered circular image' src='/images/photo.png' />
+        <h2 class='ui header'>
+          {{getUserName author}}
+          <div class='sub header'>{{getFullName author}}</div>
+          {{#if notOwnPost}}
+            <div class='ui hidden section divider'></div>
+            <button class='ui tiny button'>Count me In!</button>
+          {{/if}}
+        </h2>
+        <h2 class='ui dividing header'></h2>
+          <div class='ui mini statistic'>
+            <div class='value'>
+              {{start}}
+            </div>
+            <div class='label'>
+              Start
+            </div>
+          </div>
+          <div class='ui mini statistic'>
+            <div class='value'>
+              {{end}}
+            </div>
+            <div class='label'>
+              End
+            </div>
+          </div>
+          <h2 class='ui dividing header'></h2>
+          <div class='ui tiny teal statistic'>
+            <div class='value'>
+              {{time}}
+            </div>
+            <div class='label'>
+              Date
+            </div>
+          </div>
+          <div class='ui red statistic'>
+            <div class='value'>
+              {{numberOfPersons}}
+            </div>
+            <div class='label'>
+              People
+            </div>
+          </div>
+      </div>
+      <div class='ui ten wide column'>
+        <div class='ui basic segment'>
+          <div class="ui active inverted dimmer" id='pool-page-loader'>
+            <div class="ui medium text loader">Loading</div>
+          </div>
+          <div class='map-container' style='height: 550px'>
+            {{> googleMap name="exampleMap" options=exampleMapOptions}}
+          </div>
+          {{drawRoute start end}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

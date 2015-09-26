@@ -1,5 +1,8 @@
 <template name='homePageMap'>
-  <div class="map-container">
+  <div class="ui basic segment map-container">
+    <div class="ui active inverted dimmer" id='home-page-loader'>
+      <div class="ui medium text loader">Loading</div>
+    </div>
     {{> googleMap name="exampleMap" options=exampleMapOptions}}
     {{#each pools}}
       {{drawRoute start end}}

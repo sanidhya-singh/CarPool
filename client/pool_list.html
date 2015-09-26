@@ -1,0 +1,47 @@
+<template name='poolList'>
+  <div class='ui basic segment'>
+    {{#each pools}}
+    <a href='{{pathFor 'poolPage' _id}}'>
+      <div class='ui segment'>
+        <div class='ui grid'>
+          <div class='ui four wide column'>
+            <i class='car big icon'></i>
+            <h3 class='ui header'>
+              {{getUserName author}}
+              <div class='sub header'>Pooler</div>
+            </h3>
+          </div>
+          <div class='ui four wide column'>
+                <h5 class='ui header'>
+                    {{start}}
+                  <div class='sub header'>
+                    From
+                  </div>
+                </h5>
+                <h5 class='ui header'>
+                    {{end}}
+                  <div class='sub header'>
+                    To
+                  </div>
+                </h5>
+          </div>
+          <div class='ui four wide column'>
+            <i class='user big icon'></i>
+            <h3 class='ui header'>
+              {{numberOfPersons}}
+              <div class='sub header'>People</div>
+            </h3>
+          </div>
+          <div class='ui four wide column'>
+            <i class='wait big icon'></i>
+            <h3 class='ui header'>
+              {{time}}
+              <div class='sub header'>Date</div>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </a>
+    {{/each}}
+  </div>
+</template>
