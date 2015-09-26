@@ -1,10 +1,12 @@
 var geocoder;
 var infowindow;
 var directionsService;
+var globalMap;
 
 Template.homePageMap.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   GoogleMaps.ready('exampleMap', function(map) {
+    Session.set('mapReady', true);
     // Add a marker to the map once it's ready
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -13,25 +15,29 @@ Template.homePageMap.onCreated(function() {
       geocoder = new google.maps.Geocoder;
       infowindow = new google.maps.InfoWindow;
       directionsService = new google.maps.DirectionsService;
-      var pools = Pools.find({}, {limit: 5});
-      pools.forEach(function(pool) {
-        calculateAndDisplayRouteHomePage(pool.start, pool.end, map.instance);
-      });
+      globalMap = map.instance;
     }
   });
 });
 
 Template.homePageMap.helpers({
-exampleMapOptions: function() {
-  // Make sure the maps API has loaded
-  if (GoogleMaps.loaded()) {
-    // Map initialization options
-    return {
-      center: new google.maps.LatLng(-37.8136, 144.9631),
-      zoom: 14
-    };
+  exampleMapOptions: function() {
+    // Make sure the maps API has loaded
+    if (GoogleMaps.loaded()) {
+      // Map initialization options
+      return {
+        center: new google.maps.LatLng(-37.8136, 144.9631),
+        zoom: 14
+      };
+    }
+  },
+  pools: function() {
+    return Pools.find();
+  },
+  drawRoute: function(start, end) {
+    if(Session.get('mapReady'))
+      calculateAndDisplayRouteHomePage(start, end, globalMap);   
   }
-}
 });
 
 function calculateAndDisplayRouteHomePage(startLocation, endLocation, map) {

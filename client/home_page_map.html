@@ -1,5 +1,8 @@
 <template name='homePageMap'>
   <div class="map-container">
     {{> googleMap name="exampleMap" options=exampleMapOptions}}
+    {{#each pools}}
+      {{drawRoute start end}}
+    {{/each}}
   </div>
 </template>
