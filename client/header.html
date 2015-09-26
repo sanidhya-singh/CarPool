@@ -1,29 +1,46 @@
 <template name='header'>
-    <div class="ui menu">
-    <div class="header item">
-      <a href="{{pathFor 'home'}}">Pooler Inc.</a>
+  <div class='ui grid'>
+    <div class='computer tablet only row'>
+      <div class="ui fixed menu navbar page grid">
+      <div class="header item">
+        <a href="{{pathFor 'home'}}">Pooler Inc.</a>
+      </div>
+      {{#if currentUser}}
+        <a class='item' href="{{pathFor 'newPool'}}">
+          <i class='plus icon'></i>
+        </a>
+      {{/if}}
+      <div class='right menu'>
+        <a class="item" href="{{pathFor 'poolList'}}">
+          Pools
+        </a>
+        <a class="item" href="{{pathFor 'aboutUs'}}">
+          About Us
+        </a>
+      {{#if currentUser}}
+        <a class='item' href="{{pathFor 'profilePage'}}">
+          Profile
+        </a>
+      {{/if}}
+        <a class='item toggleSidebar'>
+          <i class='sidebar icon'></i>
+        </a>
+        {{> loginButtons}}
+      </div>
+      </div>
     </div>
-    {{#if currentUser}}
-      <a class='item' href="{{pathFor 'newPool'}}">
-        <i class='plus icon'></i>
-      </a>
-    {{/if}}
-    <div class='right menu'>
-      <a class="item" href="{{pathFor 'poolList'}}">
-        Pools
-      </a>
-      <a class="item" href="{{pathFor 'aboutUs'}}">
-        About Us
-      </a>
-    {{#if currentUser}}
-      <a class='item' href="{{pathFor 'profilePage'}}">
-        Profile
-      </a>
-    {{/if}}
-      <a class='item toggleSidebar'>
-        <i class='sidebar icon'></i>
-      </a>
-      {{> loginButtons}}
+    <div class='mobile only row'>
+      <div class='ui fixed menu navbar page grid'>
+        <div class="header item">
+          <a href="{{pathFor 'home'}}">Pooler Inc.</a>
+        </div>
+        <div class='right menu'>
+          {{> loginButtons}}
+          <a class='item toggleSidebar'>
+            <i class='sidebar icon'></i>
+          </a>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </template>

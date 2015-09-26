@@ -1,18 +1,38 @@
 <template name='layout'>
-  <div class="ui sidebar inverted vertical menu">
-   <a class="item">
-     1st Item
-   </a>
-   <a class="item">
-     2nd Item
-   </a>
-   <a class="item">
-     3rd Item
-   </a>
+  <div class="ui sidebar inverted vertical labeled icon menu" id='sidebar'>
+    <div class="header item toggleSidebar">
+      <a href="{{pathFor 'home'}}">Pooler Inc.</a>
+    </div>
+    {{#if currentUser}}
+      <a class='item toggleSidebar' href="{{pathFor 'newPool'}}">
+        <i class='plus icon'></i>
+        Add Pool
+      </a>
+    {{/if}}
+      <a class="item toggleSidebar" href="{{pathFor 'poolList'}}">
+        <i class='car icon'></i>
+        Pools
+      </a>
+      <a class="item toggleSidebar" href="{{pathFor 'aboutUs'}}">
+        <i class='info icon'></i>
+        About Us
+      </a>
+    {{#if currentUser}}
+      <a class='item toggleSidebar' href="{{pathFor 'profilePage'}}">
+        <i class='user icon'></i>
+        Profile
+      </a>
+    {{/if}}
  </div>
   <div class='ui pusher'>
     <div class='ui container'>
       {{> header}}
+      <div class='ui horizontal divider'>
+      </div>
+      <div class='ui horizontal divider'>
+      </div>
+      <div class='ui horizontal divider'>
+      </div>
       <div class='ui horizontal divider'>
       </div>
       {{> yield}}

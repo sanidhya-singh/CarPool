@@ -5,12 +5,4 @@ if (Meteor.isClient) {
   Meteor.startup(function(){
       GoogleMaps.load();
   });
-
-  Template.header.events({
-    'click .toggleSidebar': function(e) {
-      e.preventDefault();
-      $('.ui.sidebar')
-      .sidebar('toggle');
-    }
-  });
 }

@@ -1,10 +1,46 @@
 <template name='homePage'>
+  <h1 class='ui header'>
+    <div class="ui text shape" id='text-shape'>
+      <div class="sides">
+        <div class="ui header side active">Welcome to CarPool.</div>
+        <div class="ui header side">Willkommen zu CarPool.</div>
+        <div class="ui header side">Bienvenido a CarPool.</div>
+      </div>
+    </div>
+    <div class='sub header'>
+      Hate travelling alone?
+      We'll find you some companions.
+    </div>
+  </h1>
   {{> homePageMap}}
   <div class='ui center aligned basic segment'>
     <h2 class='ui header'>
       This is a reactive Google Maps instance showing CarPool routes near you LIVE!
       <div class='sub header'>Register to add your own!</div>
     </h2>
+  </div>
+  <div class="ui tablet stackable fluid steps">
+    <div class="active step">
+      <i class="marker icon"></i>
+      <div class="content">
+        <div class="title">Where?</div>
+        <div class="description">Choose your Pool Source and Destination</div>
+      </div>
+    </div>
+    <div class="active step">
+      <i class="wait icon"></i>
+      <div class="content">
+        <div class="title">When?</div>
+        <div class="description">Tell us when you'll be going</div>
+      </div>
+    </div>
+    <div class="active step">
+      <i class="users icon"></i>
+      <div class="content">
+        <div class="title">How many?</div>
+        <div class="description">Tell us how many you can accomodate</div>
+      </div>
+    </div>
   </div>
   {{> siteStatistics}}
 </template>
