@@ -1,7 +1,10 @@
 <template name='header'>
   <div class='ui grid'>
     <div class='computer tablet only row'>
-      <div class="ui fixed menu navbar page grid">
+      <div class='ui sixteen wide column'>
+        <div class='ui horizontal divider'>
+        </div>
+      <div class="ui large menu">
       <div class="header item">
         <a href="{{pathFor 'home'}}">Pooler Inc.</a>
       </div>
@@ -29,18 +32,20 @@
       </div>
       </div>
     </div>
+    </div>
     <div class='mobile only row'>
       <div class='ui fixed menu navbar page grid'>
         <div class="header item">
           <a href="{{pathFor 'home'}}">Pooler Inc.</a>
         </div>
         <div class='right menu'>
-          {{> loginButtons}}
           <a class='item toggleSidebar'>
             <i class='sidebar icon'></i>
           </a>
+          {{> loginButtons}}
         </div>
       </div>
+      <div class='ui hidden section divider'></div>
     </div>
   </div>
 </template>
