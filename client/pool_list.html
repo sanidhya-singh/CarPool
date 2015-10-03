@@ -1,11 +1,12 @@
 <template name='poolList'>
   <div class='ui basic segment'>
     {{#each pools}}
+    <div class='ui basic segment'>
     <a href='{{pathFor 'poolPage' _id}}'>
-      <div class='ui segment'>
-        <div class='ui grid'>
+      <div class='ui divider'></div>
+        <div class='ui stackable grid'>
           <div class='ui four wide column'>
-            <i class='car big icon'></i>
+            <i class='car huge blue icon'></i>
             <h3 class='ui header'>
               {{getUserName author}}
               <div class='sub header'>Pooler</div>
@@ -26,22 +27,27 @@
                 </h5>
           </div>
           <div class='ui four wide column'>
-            <i class='user big icon'></i>
-            <h3 class='ui header'>
-              {{numberOfPersons}}
-              <div class='sub header'>People</div>
-            </h3>
+            <div class='ui large grey statistic'>
+              <div class='value'>
+                <i class='user grey icon'></i>
+                  {{numberOfPersons}}
+              </div>
+              <div class='label'>
+                People
+              </div>
+            </div>
+
           </div>
           <div class='ui four wide column'>
-            <i class='wait big icon'></i>
+            <i class='wait huge icon'></i>
             <h3 class='ui header'>
               {{time}}
               <div class='sub header'>Date</div>
             </h3>
           </div>
         </div>
-      </div>
     </a>
+  </div>
     {{/each}}
   </div>
 </template>

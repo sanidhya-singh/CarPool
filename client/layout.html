@@ -1,7 +1,7 @@
 <template name='layout'>
-  <div class="ui sidebar inverted vertical labeled icon menu" id='sidebar'>
+  <div class="ui right sidebar inverted vertical labeled icon menu" id='sidebar'>
     <div class="header item toggleSidebar">
-      <a href="{{pathFor 'home'}}">Pooler Inc.</a>
+      <a href="{{pathFor 'home'}}">CarPool</a>
     </div>
     {{#if currentUser}}
       <a class='item toggleSidebar' href="{{pathFor 'newPool'}}">
