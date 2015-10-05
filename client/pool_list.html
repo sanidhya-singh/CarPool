@@ -1,53 +1,96 @@
 <template name='poolList'>
   <div class='ui basic segment'>
-    {{#each pools}}
-    <div class='ui basic segment'>
-    <a href='{{pathFor 'poolPage' _id}}'>
-      <div class='ui divider'></div>
+    <div class='ui float right'>
+      <div class='ui segment'>
+        <label class='ui red ribbon label'>Feature not currently supported</label>
         <div class='ui stackable grid'>
-          <div class='ui four wide column'>
-            <i class='car huge blue icon'></i>
-            <h3 class='ui header'>
-              {{getUserName author}}
-              <div class='sub header'>Pooler</div>
-            </h3>
-          </div>
-          <div class='ui four wide column'>
-                <h5 class='ui header'>
-                    {{start}}
-                  <div class='sub header'>
-                    From
+          <div class='ui twelve wide column'>
+            <div class='ui basic segment'>
+              <form class='ui form'>
+                <div class='ui three fields'>
+                  <div class='field'>
+                    <label>Filter <i class='search icon'></i></label>
+                    <div class='ui labeled input'>
+                      <div class='ui label'>
+                        From
+                      </div>
+                      <input id='filter-from' type='text' />
+                    </div>
                   </div>
-                </h5>
-                <h5 class='ui header'>
-                    {{end}}
-                  <div class='sub header'>
-                    To
+                  <div class='field'>
+                    <label>&nbsp;</label>
+                    <div class='ui labeled input'>
+                      <div class='ui label'>
+                        To
+                      </div>
+                      <input id='filter-to' type='text' />
+                    </div>
                   </div>
-                </h5>
-          </div>
-          <div class='ui four wide column'>
-            <div class='ui large grey statistic'>
-              <div class='value'>
-                <i class='user grey icon'></i>
-                  {{numberOfPersons}}
-              </div>
-              <div class='label'>
-                People
-              </div>
+                  <div class='field'>
+                    <label>&nbsp;</label>
+                    <div class='ui labeled input'>
+                      <div class='ui label'>
+                        Date
+                      </div>
+                      <input id='filter-date' type='text' />
+                    </div>
+                  </div>
+                </div>
+                <input type='submit' id='filter-submit' style='display: none' />
+              </form>
             </div>
-
-          </div>
-          <div class='ui four wide column'>
-            <i class='wait huge icon'></i>
-            <h3 class='ui header'>
-              {{time}}
-              <div class='sub header'>Date</div>
-            </h3>
           </div>
         </div>
-    </a>
-  </div>
-    {{/each}}
+      </div>
+    </div>
+    {{#each pools}}
+      <div class='ui basic segment'>
+      <a href='{{pathFor 'poolPage' _id}}'>
+        <div class='ui divider'></div>
+          <div class='ui stackable grid'>
+            <div class='ui four wide column'>
+              <i class='car huge blue icon'></i>
+              <h3 class='ui header'>
+                {{getUserName author}}
+                <div class='sub header'>Pooler</div>
+              </h3>
+            </div>
+            <div class='ui four wide column'>
+                  <h5 class='ui header'>
+                      {{start}}
+                    <div class='sub header'>
+                      From
+                    </div>
+                  </h5>
+                  <h5 class='ui header'>
+                      {{end}}
+                    <div class='sub header'>
+                      To
+                    </div>
+                  </h5>
+            </div>
+            <div class='ui four wide column'>
+              <div class='ui large grey statistic'>
+                <div class='value'>
+                  <i class='user grey icon'></i>
+                    {{numberOfPersons}}
+                </div>
+                <div class='label'>
+                  People
+                </div>
+              </div>
+
+            </div>
+            <div class='ui four wide column'>
+              <i class='wait huge icon'></i>
+              <h3 class='ui header'>
+                {{time}}
+                <div class='sub header'>Date</div>
+              </h3>
+            </div>
+          </div>
+      </a>
+    </div>
+  {{/each}}
   </div>
 </template>
