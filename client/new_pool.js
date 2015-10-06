@@ -4,38 +4,49 @@ var infowindow;
 var directionsService;
 var directionsDisplay;
 
+var input1;
+var input2;
+
+var startMarker;
+var endMarker;
+
 Template.newPool.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   Session.set('start', null);
   Session.set('end', null);
   GoogleMaps.ready('exampleMap', function(map) {
     // Add a marker to the map once it's ready
+    input1 = document.getElementById('start-box');
+    input2 = document.getElementById('end-box');
+    var searchBox1 = new google.maps.places.SearchBox(input1);
+    var searchBox2 = new google.maps.places.SearchBox(input2);
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         map.instance.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
-        marker = new google.maps.Marker({
+        $('#new-pool-loader').removeClass('active');
+        /*marker = new google.maps.Marker({
           map: map.instance,
           draggable: true,
           animation: google.maps.Animation.DROP,
           position: {lat: position.coords.latitude, lng: position.coords.longitude}
-        });
-        marker.addListener('click', toggleBounce);
+        });*/
+        //marker.addListener('click', toggleBounce);
         geocoder = new google.maps.Geocoder;
         infowindow = new google.maps.InfoWindow;
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         directionsDisplay.setMap(map.instance);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
-        if(!Session.get('start'))
-          getStartLocation(map.instance, {lat: position.coords.latitude, lng: position.coords.longitude});
+        //if(!Session.get('start'))
+        //  getStartLocation(map.instance, {lat: position.coords.latitude, lng: position.coords.longitude});
 
-        google.maps.event.addListener(marker,'dragend',function(event) {
+        /*google.maps.event.addListener(marker,'dragend',function(event) {
           var newPosition = {
             lat: event.latLng.lat(),
             lng:  event.latLng.lng()
           }
           geocodeLatLng(map.instance, newPosition);
-        });
+        });*/
       });
     }
   });
@@ -50,20 +61,23 @@ function toggleBounce() {
 }
 
 function calculateAndDisplayRoute() {
+  console.log('called');
   directionsService.route({
-    origin: Session.get('start'),
-    destination: Session.get('end'),
+    origin: input1.value,
+    destination: input2.value,
     travelMode: google.maps.TravelMode.DRIVING
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
+      $('#new-pool-loader').removeClass('active');
     } else {
-      window.alert('Directions request failed due to ' + status);
+      alert('That\'s too far!');
+      $('#new-pool-loader').removeClass('active');
     }
   });
 }
 
-function getStartLocation(map, position) {
+/*function getStartLocation(map, position) {
   if(position) {
       var latlng = {lat: position.lat, lng: position.lng};
       geocoder.geocode({'location': latlng}, function(results, status) {
@@ -81,10 +95,10 @@ function getStartLocation(map, position) {
         }
       });
     }
-}
+}*/
 
 
-function geocodeLatLng(map, position) {
+/*function geocodeLatLng(map, position) {
   if(position) {
       var latlng = {lat: position.lat, lng: position.lng};
       geocoder.geocode({'location': latlng}, function(results, status) {
@@ -103,7 +117,7 @@ function geocodeLatLng(map, position) {
         }
       });
     }
-}
+}*/
 
 Template.newPool.helpers({
   exampleMapOptions: function() {
@@ -151,6 +165,25 @@ Template.newPool.events({
     });
 
     Router.go('home');
+  },
+  'change .startBox': function(e) {
+    e.preventDefault();
+    console.log('1 length: ' + input1.value.length);
+    console.log('2 length: ' + input2.value.length);
+    if(input1.value.length === 0 || input2.value.length === 0)
+      return;
+    $('#new-pool-loader').addClass('active');
+    calculateAndDisplayRoute();
+
+  },
+  'change .endBox': function(e) {
+    e.preventDefault();
+    console.log('1 length: ' + input1.value.length);
+    console.log('2 length: ' + input2.value.length);
+    if(input1.value.length === 0 || input2.value.length === 0)
+      return;
+    $('#new-pool-loader').addClass('active');
+    calculateAndDisplayRoute();
   }
 });
 

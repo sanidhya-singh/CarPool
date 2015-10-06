@@ -2,25 +2,28 @@
   <div class='ui basic segment'>
     <form class="ui form">
       <h4 class="ui dividing header">Pool Information</h4>
-      <div class='ui grid'>
+      <div class='ui stackable grid'>
         <div class='ui ten wide column'>
+          <div class="ui inverted active dimmer" id='new-pool-loader'>
+            <div class="ui medium text loader">Loading</div>
+          </div>
           <div class="map-container">
             {{> googleMap name="exampleMap" options=exampleMapOptions}}
           </div>
         </div>
         <div class='ui six wide column' id='right-panel' style='max-height: 400px; overflow-y: scroll'>
-          Drag and Drop the marker to set your Desitnation
+          Enter your Starting Location and your Destination
         </div>
       </div>
       <h4 class='ui dividing header'>Trip Details</h4>
       <div class='two fields'>
         <div class='field' id='start-field'>
           <label>Start</label>
-          <input id='start-box' />
+          <input class='startBox' id='start-box' />
         </div>
         <div class='field' id='end-field'>
           <label>End</label>
-          <input id='end-box' />
+          <input class='endBox' id='end-box' />
         </div>
       </div>
       <div class='two fields' id='people-field'>
