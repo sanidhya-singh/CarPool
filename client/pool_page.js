@@ -66,7 +66,7 @@ function calculateAndDisplayRoutePoolPage(startLocation, endLocation, map) {
         console.log('You clicked on a route');
       });
     } else {
-      window.alert('Directions request failed due to ' + status);
+      console.log('Directions request failed due to ' + status);
     }
   });
 }

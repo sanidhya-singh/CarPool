@@ -6,7 +6,10 @@
         </div>
       <div class="ui large menu">
       <div class="header item">
-        <a href="{{pathFor 'home'}}">CarPool</a>
+        <a href="{{pathFor 'home'}}">
+          <i class='car icon'></i>
+          CarPool
+        </a>
       </div>
       {{#if currentUser}}
         <a class='item' href="{{pathFor 'newPool'}}">
@@ -35,13 +38,11 @@
     </div>
     <div class='mobile only row'>
       <div class='ui fixed menu navbar page grid'>
-        <div class="header item">
-          <a href="{{pathFor 'home'}}">CarPool</a>
-        </div>
+        <a class="header item toggleSidebar">
+          <i class='sidebar icon'></i>
+            CarPool
+        </a>
         <div class='right menu'>
-          <a class='item toggleSidebar'>
-            <i class='sidebar icon'></i>
-          </a>
           {{> loginButtons}}
         </div>
       </div>

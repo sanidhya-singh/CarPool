@@ -3,6 +3,10 @@
     <div class="header item toggleSidebar">
       <a href="{{pathFor 'home'}}">CarPool</a>
     </div>
+      <a class='item' href="{{pathFor 'home'}}">
+        <i class='home icon'></i>
+        Home
+      </a>
     {{#if currentUser}}
       <a class='item toggleSidebar' href="{{pathFor 'newPool'}}">
         <i class='plus icon'></i>
@@ -13,16 +17,16 @@
         <i class='car icon'></i>
         Pools
       </a>
-      <a class="item toggleSidebar" href="{{pathFor 'aboutUs'}}">
-        <i class='info icon'></i>
-        About Us
-      </a>
     {{#if currentUser}}
       <a class='item toggleSidebar' href="{{pathFor 'profilePage'}}">
         <i class='user icon'></i>
         Profile
       </a>
     {{/if}}
+    <a class="item toggleSidebar" href="{{pathFor 'aboutUs'}}">
+      <i class='info icon'></i>
+      About Us
+    </a>
  </div>
   <div class='ui pusher'>
     <div class='ui container'>

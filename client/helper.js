@@ -15,3 +15,14 @@ Template.registerHelper('getSession', function(name) {
   if(variable)
     return variable;
 });
+
+Template.registerHelper('postOwner', function(author) {
+  if(author === Meteor.userId()) {
+    return true;
+  }
+  return false;
+});
+
+Template.registerHelper("toUpperCase", function(string){
+  return string.toUpperCase();
+});

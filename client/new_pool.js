@@ -162,6 +162,9 @@ Template.newPool.events({
       if(err) {
         console.log(err);
       }
+      else {
+        Router.go('poolPage', {_id: res});
+      }
     });
 
     Router.go('home');

@@ -6,28 +6,30 @@
         <h2 class='ui header'>
           {{getUserName author}}
           <div class='sub header'>{{getFullName author}}</div>
-          {{#if notOwnPost}}
-            <div class='ui hidden section divider'></div>
-            <button class='ui tiny button'>Count me In!</button>
-          {{/if}}
         </h2>
+          {{#if notOwnPost}}
+            {{#if currentUser}}
+              <button class='ui blue tiny labeled icon button'>
+                <i class='plus icon'></i>
+                Request
+              </button>
+              {{else}}
+              <label class='ui green label'>Sign Up/In to request to Join this pool</label>
+            {{/if}}
+          {{/if}}
         <h2 class='ui dividing header'></h2>
-          <div class='ui mini statistic'>
-            <div class='value'>
-              {{start}}
+          <h2 class='ui header'>
+            {{toUpperCase start}}
+            <div class='sub header'>
+              From
             </div>
-            <div class='label'>
-              Start
+          </h2>
+          <h2 class='ui header'>
+            {{toUpperCase end}}
+            <div class='sub header'>
+              To
             </div>
-          </div>
-          <div class='ui mini statistic'>
-            <div class='value'>
-              {{end}}
-            </div>
-            <div class='label'>
-              End
-            </div>
-          </div>
+          </h2>
           <h2 class='ui dividing header'></h2>
           <div class='ui tiny teal statistic'>
             <div class='value'>

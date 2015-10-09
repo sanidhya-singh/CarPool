@@ -9,6 +9,14 @@
     <label for='upload-profile-photo' class='ui small circular teal icon button'>
       <i class='cloud upload icon'></i>
     </label>
+    <h1 class='ui header'>
+      {{#if currentUser.profile.image}}
+        {{else}}
+        <div class="ui pointing red label">Upload a profile picture</div>
+      {{/if}}
+      <div class='sub header'>
+      </div>
+    </h1>
   </div>
 {{#markdown}}
 

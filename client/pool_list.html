@@ -1,11 +1,11 @@
 <template name='poolList'>
   <div class='ui basic segment'>
+    <label class='ui red label'>Feature not currently supported</label>
     <div class='ui float right'>
-      <div class='ui segment'>
-        <label class='ui red ribbon label'>Feature not currently supported</label>
+      <div class='ui basic segment'>
         <div class='ui stackable grid'>
           <div class='ui twelve wide column'>
-            <div class='ui basic segment'>
+            <div>
               <form class='ui form'>
                 <div class='ui three fields'>
                   <div class='field'>
@@ -54,6 +54,14 @@
                 {{getUserName author}}
                 <div class='sub header'>Pooler</div>
               </h3>
+              {{#if postOwner author}}
+                <button class='ui mini circular red icon button'>
+                  <i class='trash icon'></i>
+                </button>
+                <button class='ui mini circular teal icon button'>
+                  <i class='edit icon'></i>
+                </button>
+              {{/if}}
             </div>
             <div class='ui four wide column'>
                   <h5 class='ui header'>

@@ -16,7 +16,7 @@ Meteor.methods({
       return;
     }
 
-    Pools.insert(pool);      
+    return Pools.insert(pool);      
   }
 });
 
