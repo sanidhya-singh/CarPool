@@ -15,3 +15,6 @@ houston:admin
 sarasate:semantic-ui-datetimepicker
 timmyg:wow
 markdown
+cfs:standard-packages
+cfs:gridfs
+pcel:loading

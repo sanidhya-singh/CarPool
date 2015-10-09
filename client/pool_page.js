@@ -26,6 +26,13 @@ Template.poolPage.helpers({
         calculateAndDisplayRoutePoolPage(start, end, globalMap);
         $('#pool-page-loader').removeClass('active');
     }
+  },
+  getDP: function() {
+    var author = Meteor.users.findOne(this.author);
+    if(author) {
+      return author.profile.image;
+    }
+    return '/images/photo.png';
   }
 });
 

@@ -1,10 +1,14 @@
 <template name='profilePage'>
   <div class='ui basic center aligned segment'>
-    <img class='ui centered circular image' src='/images/photo.png' />
+    <img class='ui centered medium circular image' src="{{currentUser.profile.image}}" />
     <h1 class='ui header'>
       {{currentUser.username}}
       <div class='sub header'>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</div>
     </h1>
+    <input type="file" style='display: none' id='upload-profile-photo' class="upload-profile-photo" />
+    <label for='upload-profile-photo' class='ui small circular teal icon button'>
+      <i class='cloud upload icon'></i>
+    </label>
   </div>
 {{#markdown}}
 
