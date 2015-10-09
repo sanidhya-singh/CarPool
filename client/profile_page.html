@@ -1,6 +1,6 @@
 <template name='profilePage'>
   <div class='ui basic center aligned segment'>
-    <img class='ui centered medium circular image' src="{{currentUser.profile.image}}" />
+    <img class='ui centered small circular image' src="{{currentUser.profile.image}}" />
     <h1 class='ui header'>
       {{currentUser.username}}
       <div class='sub header'>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</div>
@@ -17,6 +17,44 @@
       <div class='sub header'>
       </div>
     </h1>
+    <div class='ui stackable grid'>
+      <div class='ui eight wide column'>
+        <h1 class='ui dividing header'>
+          Pool Requests
+        </h1>
+        {{#if poolRequests}}
+          {{#each poolRequests}}
+            <div class='ui center aligned segment'>
+              <div class='ui basic segment'>
+                <img class='ui centered small circular image' src='{{getDP requestId}}' />
+              </div>
+              <strong>{{getFullName requestId}}</strong> ({{getUserName requestId}}) wants to join you on your <a href="{{pathFor 'poolPage' _id=postId}}">pool</a>
+              <div class='ui inverted section divider'></div>
+              <button class='ui green small circular icon button'>
+                <i class='checkmark icon'></i>
+              </button>
+              <button class='ui red small circular icon button'>
+                <i class='remove icon'></i>
+              </button>
+            </div>
+          {{/each}}
+          {{else}}
+            <div class='ui inverted teal center aligned segment'>
+              <h1 class='ui inverted header'>
+                0 requests
+                <div class='sub header'>
+                  Sorry, you have no new requests
+                </div>
+              </h1>
+            </div>
+        {{/if}}
+      </div>
+      <div class='ui eight wide column'>
+        <h1 class='ui dividing header'>
+          Wyain
+        </h1>
+      </div>
+    </div>
   </div>
 {{#markdown}}
 

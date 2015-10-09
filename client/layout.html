@@ -1,5 +1,5 @@
 <template name='layout'>
-  <div class="ui right sidebar inverted vertical labeled icon menu" id='sidebar'>
+  <div class="ui sidebar inverted vertical labeled icon menu" id='sidebar'>
     <div class="header item toggleSidebar">
       <a href="{{pathFor 'home'}}">CarPool</a>
     </div>
@@ -21,6 +21,11 @@
       <a class='item toggleSidebar' href="{{pathFor 'profilePage'}}">
         <i class='user icon'></i>
         Profile
+        {{#if requestCount}}
+          <div class='floating ui label'>
+            {{requestCount}}
+          </div>
+        {{/if}}
       </a>
     {{/if}}
     <a class="item toggleSidebar" href="{{pathFor 'aboutUs'}}">

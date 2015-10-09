@@ -9,10 +9,17 @@
         </h2>
           {{#if notOwnPost}}
             {{#if currentUser}}
-              <button class='ui blue tiny labeled icon button'>
-                <i class='plus icon'></i>
-                Request
-              </button>
+              {{#if requested}}
+                <button class='ui tiny inverted green labeled icon button'>
+                  <i class='checkmark icon'></i>
+                  Requested
+                </button>
+                {{else}}
+                <button class='ui blue tiny labeled icon button requested'>
+                  <i class='plus icon'></i>
+                  Request
+                </button>
+                {{/if}}
               {{else}}
               <label class='ui green label'>Sign Up/In to request to Join this pool</label>
             {{/if}}

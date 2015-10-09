@@ -18,3 +18,27 @@ Template.profilePage.events({
     });
   }
 });
+
+Template.profilePage.helpers({
+  'poolRequests': function() {
+    return PoolRequest.find({authorId: Meteor.userId()});
+  },
+  'getSource': function(poolId) {
+    var pool = Pools.findOne(poolId);
+    if(pool) {
+      return pool.start;
+    }
+  },
+  'getDestination': function(poolId) {
+    var pool = Pools.findOne(poolId);
+    if(pool) {
+      return pool.end;
+    }
+  },
+  'getDP': function(userId) {
+    var user = Meteor.users.findOne(userId);
+    if(user && user.profile.image) {
+      return user.profile.image;
+    }
+  }
+});

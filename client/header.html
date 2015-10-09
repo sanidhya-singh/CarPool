@@ -26,6 +26,11 @@
       {{#if currentUser}}
         <a class='item' href="{{pathFor 'profilePage'}}">
           Profile
+          {{#if requestCount}}
+            <div class='floating ui red label'>
+              {{requestCount}}
+            </div>
+          {{/if}}
         </a>
       {{/if}}
         <a class='center aligned item toggleSidebar'>
@@ -41,6 +46,11 @@
         <a class="header item toggleSidebar">
           <i class='sidebar icon'></i>
             CarPool
+            {{#if requestCount}}
+              <label class='ui red label'>
+                {{requestCount}}
+              </label>
+            {{/if}}
         </a>
         <div class='right menu'>
           {{> loginButtons}}

@@ -33,6 +33,13 @@ Template.poolPage.helpers({
       return author.profile.image;
     }
     return '/images/photo.png';
+  },
+  requested: function() {
+    console.log(this.author);
+    if(PoolRequest.findOne({postId: this._id, requestId: Meteor.userId()})) {
+      return true;
+    }
+    return false;
   }
 });
 
@@ -70,3 +77,20 @@ function calculateAndDisplayRoutePoolPage(startLocation, endLocation, map) {
     }
   });
 }
+
+Template.poolPage.events({
+  'click .requested': function(e) {
+    console.log('Request sent');
+    var request = {
+      postId: this._id,
+      authorId: this.author
+    }
+    Meteor.call('poolRequestInsert', request, function(err, res) {
+      if(err) {
+        alert('An error occured');
+      } else {
+        alert('Request submitted successfully');
+      }
+    });
+  }
+});

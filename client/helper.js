@@ -26,3 +26,7 @@ Template.registerHelper('postOwner', function(author) {
 Template.registerHelper("toUpperCase", function(string){
   return string.toUpperCase();
 });
+
+Template.registerHelper("requestCount", function(){
+  return PoolRequest.find({authorId: Meteor.userId()}).count();
+});
