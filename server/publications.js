@@ -1,5 +1,5 @@
-Meteor.publish('pools', function() {
-  return Pools.find();
+Meteor.publish('pools', function(options) {
+  return Pools.find({}, options);
 });
 
 Meteor.publish('users', function() {
@@ -17,4 +17,12 @@ Meteor.publish('requests', function(userId) {
 
 Meteor.publish('userPosts', function(userId) {
   return Pools.find({author: userId});
+});
+
+Meteor.publish('singlePool', function(id) {
+  return Pools.find(id);
+});
+
+Meteor.publish('searchPools', function(options) {
+  return Pools.find(options);
 });

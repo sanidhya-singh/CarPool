@@ -2,26 +2,43 @@
   <div class='ui basic segment'>
     <div class='ui stackable grid'>
       <div class='ui six wide center aligned column'>
-        <img class='ui small centered circular image' src="{{getDP}}" />
+        <img class='ui small centered circular image' src="{{getDP author}}" />
         <h2 class='ui header'>
           {{getUserName author}}
           <div class='sub header'>{{getFullName author}}</div>
         </h2>
+        {{#each people}}
+          <img class='ui tiny circular spaced image' src="{{getDP this}}" />
+        {{/each}}
           {{#if notOwnPost}}
             {{#if currentUser}}
               {{#if requested}}
-                <button class='ui tiny inverted green labeled icon button'>
-                  <i class='checkmark icon'></i>
-                  Requested
-                </button>
+                <div class='ui stackable center aligned padded grid'>
+                  <div class='ui center aligned row'>
+                    <button class='ui tiny inverted green labeled icon button'>
+                      <i class='checkmark icon'></i>
+                      Requested
+                    </button>
+                  </div>
+                </div>
                 {{else}}
-                <button class='ui blue tiny labeled icon button requested'>
-                  <i class='plus icon'></i>
-                  Request
-                </button>
+                  {{#if notAccepted}}
+                    <div class='ui stackable center aligned padded grid'>
+                      <div class='ui center aligned row'>
+                        <button class='ui blue tiny labeled icon button requested'>
+                          <i class='plus icon'></i>
+                          Request
+                        </button>
+                      </div>
+                    </div>
+                  {{/if}}
                 {{/if}}
               {{else}}
-              <label class='ui green label'>Sign Up/In to request to Join this pool</label>
+              <div class='ui stackable center aligned padded grid'>
+                <div class='ui center aligned row'>
+                  <label class='ui green label'>Sign Up/In to request to Join this pool</label>
+                </div>
+              </div>
             {{/if}}
           {{/if}}
         <h2 class='ui dividing header'></h2>

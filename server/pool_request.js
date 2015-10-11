@@ -9,6 +9,9 @@ Meteor.methods({
       postId: request.postId,
       authorId: request.authorId
     }
-    return PoolRequest.insert(poolRequest);  
+    return PoolRequest.insert(poolRequest);
+  },
+  'removePoolRequest': function(poolRequestId) {
+    return PoolRequest.remove({_id: poolRequestId});
   }
 });

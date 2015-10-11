@@ -1,43 +1,57 @@
 <template name='profilePage'>
-  <div class='ui basic center aligned segment'>
-    <img class='ui centered small circular image' src="{{currentUser.profile.image}}" />
-    <h1 class='ui header'>
-      {{currentUser.username}}
-      <div class='sub header'>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</div>
-    </h1>
-    <input type="file" style='display: none' id='upload-profile-photo' class="upload-profile-photo" />
-    <label for='upload-profile-photo' class='ui small circular teal icon button'>
-      <i class='cloud upload icon'></i>
-    </label>
-    <h1 class='ui header'>
-      {{#if currentUser.profile.image}}
-        {{else}}
-        <div class="ui pointing red label">Upload a profile picture</div>
-      {{/if}}
-      <div class='sub header'>
-      </div>
-    </h1>
+    <div class='ui center aligned basic segment'>
+      <img class='ui centered small circular image' src="{{currentUser.profile.image}}" />
+      <h1 class='ui center aligned header'>
+        {{currentUser.username}}
+        <div class='sub header'>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</div>
+      </h1>
+      <input type="file" style='display: none' id='upload-profile-photo' class="upload-profile-photo" />
+      <label for='upload-profile-photo' class='ui small circular teal icon button'>
+        <i class='cloud upload icon'></i>
+      </label>
+      <h1 class='ui center aligned header'>
+        {{#if currentUser.profile.image}}
+          {{else}}
+          <div class="ui pointing red label">Upload a profile picture</div>
+        {{/if}}
+        <div class='sub header'>
+        </div>
+      </h1>
+    </div>
     <div class='ui stackable grid'>
+      <div class='ui row'>
       <div class='ui eight wide column'>
         <h1 class='ui dividing header'>
           Pool Requests
         </h1>
-        {{#if poolRequests}}
+        {{#if havePoolRequests}}
+          <div class='ui feed'>
           {{#each poolRequests}}
-            <div class='ui center aligned segment'>
-              <div class='ui basic segment'>
-                <img class='ui centered small circular image' src='{{getDP requestId}}' />
+            <div class="event">
+              <div class="label">
+                <img src="{{getDP requestId}}">
               </div>
-              <strong>{{getFullName requestId}}</strong> ({{getUserName requestId}}) wants to join you on your <a href="{{pathFor 'poolPage' _id=postId}}">pool</a>
-              <div class='ui inverted section divider'></div>
-              <button class='ui green small circular icon button'>
-                <i class='checkmark icon'></i>
-              </button>
-              <button class='ui red small circular icon button'>
-                <i class='remove icon'></i>
-              </button>
+              <div class="content">
+                <div class="summary">
+                  <a class="user">
+                    {{getFullName requestId}} ({{getUserName requestId}})
+                  </a> wants to join you on your <a href="{{pathFor 'poolPage' _id=postId}}">pool</a>
+                  <div class="date">
+                    Date
+                  </div>
+                </div>
+                <div class='extra text'>
+                  <button class='ui green mini circular icon button accept'>
+                    <i class='checkmark icon'></i>
+                  </button>
+                  <button class='ui red mini circular icon button reject'>
+                    <i class='remove icon'></i>
+                  </button>
+                </div>
+              </div>
             </div>
           {{/each}}
+          </div>
           {{else}}
             <div class='ui inverted teal center aligned segment'>
               <h1 class='ui inverted header'>
@@ -51,11 +65,112 @@
       </div>
       <div class='ui eight wide column'>
         <h1 class='ui dividing header'>
-          Wyain
+          Details <label class='ui red label'>Feature not currently supported</label>
         </h1>
+        <form class='ui form'>
+          <div class='two fields'>
+            <div class='field'>
+              <label>First Name</label>
+              <input type='text' value="{{currentUser.profile.firstName}}" id='first-name-box' />
+            </div>
+            <div class='field'>
+              <label>Last Name</label>
+              <input type='text' value="{{currentUser.profile.lastName}}" id='last-name-box' />
+            </div>
+          </div>
+          <div class='two fields'>
+            <div class='field'>
+              <label>Username</label>
+              <input class='disabled' type='text' value="{{currentUser.username}}" id='username-box' disabled />
+            </div>
+            <div class='field'>
+              <label>E-Mail</label>
+              <input class='disabled' type='text' value="{{getEmail}}" id='email-box' disabled />
+            </div>
+          </div>
+          <div class='ui segment'>
+            <div class="ui toggle checkbox">
+              <input id='more-box' name="gift" type="checkbox">
+              <label>Do you want email notifications for pool requests?</label>
+            </div>
+          </div>
+          <input class='ui button' id='user-details-submit' type='submit' value='Submit' />
+        </form>
       </div>
     </div>
-  </div>
+    <div class='ui row'>
+      <div class='ui sixteen wide column'>
+        <h1 class='ui dividing header'>Your Pools</h1>
+        {{#if havePools}}
+          {{#each pools}}
+            <div class='ui basic segment'>
+            <a href='{{pathFor 'poolPage' _id}}'>
+                <div class='ui stackable grid'>
+                  <div class='ui four wide column'>
+                    <i class='car huge blue icon'></i>
+                    <h3 class='ui header'>
+                      {{getUserName author}}
+                      <div class='sub header'>Pooler</div>
+                    </h3>
+                    {{#if postOwner author}}
+                      <button class='ui mini circular red icon button'>
+                        <i class='trash icon'></i>
+                      </button>
+                      <button class='ui mini circular teal icon button'>
+                        <i class='edit icon'></i>
+                      </button>
+                    {{/if}}
+                  </div>
+                  <div class='ui four wide column'>
+                        <h5 class='ui header'>
+                            {{start}}
+                          <div class='sub header'>
+                            From
+                          </div>
+                        </h5>
+                        <h5 class='ui header'>
+                            {{end}}
+                          <div class='sub header'>
+                            To
+                          </div>
+                        </h5>
+                  </div>
+                  <div class='ui four wide column'>
+                    <div class='ui large grey statistic'>
+                      <div class='value'>
+                        <i class='user grey icon'></i>
+                          {{numberOfPersons}}
+                      </div>
+                      <div class='label'>
+                        People
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class='ui four wide column'>
+                    <i class='wait huge icon'></i>
+                    <h3 class='ui header'>
+                      {{time}}
+                      <div class='sub header'>Date</div>
+                    </h3>
+                  </div>
+                </div>
+            </a>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class='ui inverted green center aligned segment'>
+          <h1 class='ui inverted header'>
+            0 pools
+            <div class='sub header'>
+              Sorry, you have not submitted any pools
+            </div>
+          </h1>
+        </div>
+      {{/if}}
+      </div>
+    </div>
+</div>
 {{#markdown}}
 
 # Notes

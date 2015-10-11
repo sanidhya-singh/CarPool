@@ -27,8 +27,8 @@ Template.poolPage.helpers({
         $('#pool-page-loader').removeClass('active');
     }
   },
-  getDP: function() {
-    var author = Meteor.users.findOne(this.author);
+  getDP: function(author) {
+    var author = Meteor.users.findOne(author);
     if(author) {
       return author.profile.image;
     }
@@ -40,6 +40,12 @@ Template.poolPage.helpers({
       return true;
     }
     return false;
+  },
+  notAccepted: function() {
+    if(this.people.indexOf(Meteor.userId()) !== -1) {
+      return false;
+    }
+    return true;
   }
 });
 

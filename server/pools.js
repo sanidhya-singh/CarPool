@@ -16,7 +16,16 @@ Meteor.methods({
       return;
     }
 
-    return Pools.insert(pool);      
+    return Pools.insert(pool);
+  },
+  'updatePool': function(pool) {
+    Pools.update({_id: pool._id}, {$set: pool}, function(err) {
+      if(err) {
+        console.log('There was an error in accepting the request');
+      } else {        
+        alert('Request accepted');
+      }
+    });
   }
 });
 
