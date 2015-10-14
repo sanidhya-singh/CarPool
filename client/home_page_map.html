@@ -1,11 +1,13 @@
 <template name='homePageMap'>
-  <div class="ui basic segment map-container">
-    <div class="ui active inverted dimmer" id='home-page-loader'>
-      <div class="ui medium text loader">Loading</div>
+  <div>
+    <div class="ui basic segment map-container" style='border: 4px solid #F1C40F; border-radius: 5px;'>
+      <div class="ui active dimmer" id='home-page-loader'>
+        <div class="ui medium text loader">Loading</div>
+      </div>
+      {{> googleMap name="exampleMap" options=exampleMapOptions}}
+      {{#each pools}}
+        {{drawRoute start end}}
+      {{/each}}
     </div>
-    {{> googleMap name="exampleMap" options=exampleMapOptions}}
-    {{#each pools}}
-      {{drawRoute start end}}
-    {{/each}}
   </div>
 </template>

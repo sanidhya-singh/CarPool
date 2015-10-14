@@ -1,7 +1,7 @@
 <template name='layout'>
   <div class="ui sidebar inverted vertical labeled icon menu" id='sidebar'>
     <div class="header item toggleSidebar">
-      <a href="{{pathFor 'home'}}">CarPool</a>
+      <a href="{{pathFor 'home'}}">ViGo</a>
     </div>
       <a class='item' href="{{pathFor 'home'}}">
         <i class='home icon'></i>
@@ -34,22 +34,19 @@
     </a>
  </div>
   <div class='ui pusher'>
-    <div class='ui container'>
-      {{> header}}
-      <div class='ui basic segment'>
-        {{> yield}}
+    <div class='ui inverted blue basic segment'>
+      <div class='ui container'>
+          {{> header}}
+          <div class='ui basic segment'>
+            {{> yield}}
+          </div>
       </div>
-    </div>
-    <div class='ui hidden section divider'></div>
-    <div class='ui hidden section divider'></div>
-    <h6 class='ui dividing header'></h6>
-    <div class='ui basic segment'>
-      <h4 class='ui center aligned header'>
-        Yes, it's Free
-        <div class='sub header'>
-          2015
-        </div>
-      </h4>
+      <div class='ui section divider'></div>
+      <div class='ui inverted blue basic segment'>
+        <h4 class='ui center aligned inverted yellow header'>
+           © ViGo, 2015
+        </h4>
+      </div>
     </div>
   </div>
 </template>

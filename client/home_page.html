@@ -1,24 +1,41 @@
 <template name='homePage'>
-  <h1 class='ui header'>
-    <div class="ui text shape" id='text-shape'>
-      <div class="sides">
-        <div class="ui header side active">Welcome to CarPool.</div>
-        <div class="ui header side">Willkommen zu CarPool.</div>
-        <div class="ui header side">Bienvenido a CarPool.</div>
-      </div>
-    </div>
-    <div class='sub header'>
-      Hate travelling alone?
-      We'll find you some companions.
-    </div>
-  </h1>
+  <div class='ui inverted blue segment'>
+    {{#if currentUser}}
+        <h1 class='ui inverted yellow header'>
+          Welcome back, {{currentUser.profile.firstName}}.
+          <div class='sub header'>
+            We missed you.
+          </div>
+        </h1>
+      {{else}}
+      <h1 class='ui inverted yellow header'>
+        <div class="ui text shape" id='text-shape'>
+          <div class="sides">
+            <div class="ui inverted yellow header side active">Welcome to ViGo.</div>
+            <div class="ui inverted yellow header side">Willkommen zu ViGo.</div>
+            <div class="ui inverted yellow header side">Bienvenido a ViGo.</div>
+          </div>
+        </div>
+        <div class='sub header'>
+          Hate travelling alone?
+          We'll find you some companions.
+        </div>
+      </h1>
+    {{/if}}
   {{> homePageMap}}
   <div class='ui center aligned basic segment'>
-    <h2 class='ui header'>
-      This is a reactive Google Maps instance showing CarPool routes near you LIVE!
-      <div class='sub header'>Register to add your own!</div>
+    <h2 class='ui inverted yellow header'>
+      This map is showing ViGo routes near you LIVE!
+      <div class='sub header'>
+        {{#if currentUser}}
+          Navigate to + to add your own!
+          {{else}}
+            Register to add your own!
+        {{/if}}
+      </div>
     </h2>
   </div>
+  <div class='ui section divider'></div>
   <div class="ui tablet stackable fluid steps">
     <div class="active step">
       <i class="marker icon"></i>
@@ -42,5 +59,7 @@
       </div>
     </div>
   </div>
+  <div class='ui section divider'></div>
   {{> siteStatistics}}
+</div>
 </template>

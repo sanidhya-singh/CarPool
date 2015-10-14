@@ -1,10 +1,10 @@
 <template name='search'>
   <div class='ui basic segment'>
-    <div class='ui basic inverted grey center aligned segment'>
+    <div class='ui basic center aligned segment'>
       <div class='ui stackable grid'>
         <div class='ui row'>
           <div class='ui eight wide column'>
-            <div class='ui inverted green tiny statistic'>
+            <div class='ui green tiny statistic'>
               <div class='value'>
                 {{from}}
               </div>
@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class='ui eight wide column'>
-            <div class='ui inverted red tiny statistic'>
+            <div class='ui red tiny statistic'>
               <div class='value'>
                 {{to}}
               </div>
@@ -27,9 +27,8 @@
       </div>
     </div>
     {{#each pools}}
-    <div class='ui basic segment'>
+    <div class='ui teal segment'>
     <a href='{{pathFor 'poolPage' _id}}'>
-      <div class='ui divider'></div>
         <div class='ui stackable grid'>
           <div class='ui four wide column'>
             <i class='car huge blue icon'></i>

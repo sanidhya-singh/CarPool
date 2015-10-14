@@ -44,43 +44,44 @@
       </div>
     </div>
     {{#each pools}}
-      <div class='ui basic segment'>
+      <div class='ui blue inverted segment'>
       <a href='{{pathFor 'poolPage' _id}}'>
-        <div class='ui divider'></div>
           <div class='ui stackable grid'>
-            <div class='ui four wide column'>
-              <i class='car huge blue icon'></i>
-              <h3 class='ui header'>
+            <div class='ui four wide center aligned column'>
+              <h3 class='ui yellow inverted icon header'>
+                <i class='car yellow huge icon'></i>
                 {{getUserName author}}
-                <div class='sub header'>Pooler</div>
+                <div class='sub header'></div>
               </h3>
               {{#if postOwner author}}
-                <button class='ui mini circular red icon button'>
-                  <i class='trash icon'></i>
-                </button>
-                <button class='ui mini circular teal icon button'>
-                  <i class='edit icon'></i>
-                </button>
+                <p>
+                  <button class='ui small circular yellow icon button'>
+                    <i class='trash icon'></i>
+                  </button>
+                  <button class='ui small circular yellow icon button'>
+                    <i class='edit icon'></i>
+                  </button>
+                </p>
               {{/if}}
             </div>
-            <div class='ui four wide column'>
-                  <h5 class='ui header'>
+            <div class='ui four wide center aligned column'>
+                  <h5 class='ui yellow inverted header'>
                       {{start}}
                     <div class='sub header'>
                       From
                     </div>
                   </h5>
-                  <h5 class='ui header'>
+                  <h5 class='ui yellow inverted header'>
                       {{end}}
                     <div class='sub header'>
                       To
                     </div>
                   </h5>
             </div>
-            <div class='ui four wide column'>
-              <div class='ui large grey statistic'>
+            <div class='ui four wide center aligned column'>
+              <div class='ui large yellow inverted statistic'>
                 <div class='value'>
-                  <i class='user grey icon'></i>
+                  <i class='user icon'></i>
                     {{numberOfPersons}}
                 </div>
                 <div class='label'>
@@ -89,9 +90,9 @@
               </div>
 
             </div>
-            <div class='ui four wide column'>
-              <i class='wait huge icon'></i>
-              <h3 class='ui header'>
+            <div class='ui four wide center aligned column'>
+              <h3 class='ui yellow icon inverted header'>
+                <i class='wait huge yellow icon'></i>
                 {{time}}
                 <div class='sub header'>Date</div>
               </h3>
