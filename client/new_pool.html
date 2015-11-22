@@ -1,50 +1,79 @@
 <template name='newPool'>
   <div class='ui basic segment'>
     <form class="ui form">
-      <h4 class="ui dividing header">Pool Information</h4>
-      <div class='ui stackable grid'>
-        <div class='ui ten wide column'>
-          <div class="ui inverted active dimmer" id='new-pool-loader'>
-            <div class="ui medium text loader">Loading</div>
+      <h3 class="ui inverted yellow header">Trip Information</h3>
+      <div>
+        <div class='ui stackable grid'>
+          <div class='ui ten wide column'>
+            <div class="ui inverted active dimmer" id='new-pool-loader'>
+              <div class="ui medium text loader">Loading</div>
+            </div>
+            <div class="map-container">
+              {{> googleMap name="exampleMap" options=exampleMapOptions}}
+            </div>
           </div>
-          <div class="map-container">
-            {{> googleMap name="exampleMap" options=exampleMapOptions}}
+          <div class='ui six wide column' id='right-panel' style='color: #F1C40F; max-height: 400px; overflow-y: scroll'>
+            Enter your Starting Location and your Destination
           </div>
-        </div>
-        <div class='ui six wide column' id='right-panel' style='max-height: 400px; overflow-y: scroll'>
-          Enter your Starting Location and your Destination
         </div>
       </div>
-      <h4 class='ui dividing header'>Trip Details</h4>
+      <h3 class='ui inverted yellow header'>Trip Details</h3>
       <div class='two fields'>
-        <div class='field' id='start-field'>
-          <label>Start</label>
+        <div class='field' id='start-field' >
+          <label style='color: #F1C40F'>Start</label>
           <input class='startBox' id='start-box' />
         </div>
         <div class='field' id='end-field'>
-          <label>End</label>
+          <label style='color: #F1C40F'>End</label>
           <input class='endBox' id='end-box' />
         </div>
       </div>
-      <div class='two fields' id='people-field'>
+      <div class='two fields' id='distance-field'>
         <div class='field'>
-          <label>Number of Persons</label>
-          <input id='people-box' />
+          <label style='color: #F1C40F'>Distance (Km)</label>
+          <input id='distance-box' />
         </div>
         <div class='field' id='date-field'>
-          <label>Date of Travel</label>
+          <label style='color: #F1C40F'>Date of Travel</label>
           <input class="ui dropdown datetimepicker" id='date-box' type="text"/>
         </div>
       </div>
-      <div class="ui segment">
-        <div class="field">
-          <div class="ui toggle checkbox">
-            <input id='more-box' name="gift" type="checkbox">
-            <label>Are you willing to accomodate more?</label>
+      <div class='two fields'>
+        <div class='field' id='vehicle-field'>
+          <label style='color: #F1C40F'>Choose Ride</label>
+          <div class="ui fluid selection dropdown" style='color: #2C3E50'>
+            <input id='vehicle-box' name="user" type="hidden">
+            <i class="dropdown icon"></i>
+            <div class="default text">...</div>
+            <div class="menu">
+              <div class="item" data-value="GoAuto">
+                <img class="ui mini avatar image" src="/images/avatar/small/jenny.jpg">
+                GoAuto
+              </div>
+              <div class="item" data-value="GoCompact">
+                <img class="ui mini avatar image" src="/images/avatar/small/elliot.jpg">
+                GoCompact
+              </div>
+              <div class="item" data-value="GoStretch">
+                <img class="ui mini avatar image" src="/images/avatar/small/stevie.jpg">
+                GoStretch
+              </div>
+              <div class="item" data-value="GoSupreme">
+                <img class="ui mini avatar image" src="/images/avatar/small/christian.jpg">
+                GoSupreme
+              </div>
+            </div>
           </div>
         </div>
+        <div class='field'>
+          <label style='color: #F1C40F'>Duration (Estimated)</label>
+          <input id='duration-box' />
+        </div>
       </div>
-      <input class='ui button' type='submit' value='Submit'/>
+      <div class='ui three statistics'>
+        
+      </div>
+      <input class='ui yellow button' type='submit' value='Submit'/>
     </form>
   </div>
 </template>

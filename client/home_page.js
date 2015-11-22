@@ -1,7 +1,5 @@
 Template.homePage.onRendered(function() {
-  setTimeout(function() {
-    foo();
-  }, 3500);
+
 });
 
 function foo() {

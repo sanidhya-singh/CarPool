@@ -1,0 +1,18 @@
+<template name='otp'>
+  <div class='ui basic segment'>
+    <form class='ui form otp-request' id='otp-request-form'>
+      <div class='field'>
+        <label style='color: #F1C40F'>Phone Number (10 digits)</label>
+        <input type='text' id='contact-box' maxlength="10"/>
+      </div>
+      <input type='submit' class='ui yellow button submit-otp-request' value='Verify' />
+    </form>
+    <form class='ui form otp-verify wow slideInLeft' style='display: none' id='otp-verify-form'>
+      <div class='field'>
+        <label style='color: #F1C40F'>OTP</label>
+        <input type='text' id='verify-otp-box' maxlength="5"/>
+      </div>
+      <input type='submit' class='ui yellow button verify-otp-code' value='Submit' />
+    </form>
+  </div>
+</template>

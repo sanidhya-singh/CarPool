@@ -10,6 +10,9 @@ var input2;
 var startMarker;
 var endMarker;
 
+var startCoordinates;
+var endCoordinates;
+
 Template.newPool.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   Session.set('start', null);
@@ -24,29 +27,12 @@ Template.newPool.onCreated(function() {
       navigator.geolocation.getCurrentPosition(function(position) {
         map.instance.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
         $('#new-pool-loader').removeClass('active');
-        /*marker = new google.maps.Marker({
-          map: map.instance,
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          position: {lat: position.coords.latitude, lng: position.coords.longitude}
-        });*/
-        //marker.addListener('click', toggleBounce);
         geocoder = new google.maps.Geocoder;
         infowindow = new google.maps.InfoWindow;
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         directionsDisplay.setMap(map.instance);
         directionsDisplay.setPanel(document.getElementById('right-panel'));
-        //if(!Session.get('start'))
-        //  getStartLocation(map.instance, {lat: position.coords.latitude, lng: position.coords.longitude});
-
-        /*google.maps.event.addListener(marker,'dragend',function(event) {
-          var newPosition = {
-            lat: event.latLng.lat(),
-            lng:  event.latLng.lng()
-          }
-          geocodeLatLng(map.instance, newPosition);
-        });*/
       });
     }
   });
@@ -61,13 +47,14 @@ function toggleBounce() {
 }
 
 function calculateAndDisplayRoute() {
-  console.log('called');
   directionsService.route({
     origin: input1.value,
     destination: input2.value,
     travelMode: google.maps.TravelMode.DRIVING
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
+      document.getElementById('distance-box').value = response.routes[0].legs[0].distance.value/1000;
+      document.getElementById('duration-box').value = response.routes[0].legs[0].duration.text;
       directionsDisplay.setDirections(response);
       $('#new-pool-loader').removeClass('active');
     } else {
@@ -77,16 +64,18 @@ function calculateAndDisplayRoute() {
   });
 }
 
-/*function getStartLocation(map, position) {
-  if(position) {
-      var latlng = {lat: position.lat, lng: position.lng};
-      geocoder.geocode({'location': latlng}, function(results, status) {
+function toTimestamp(strDate){
+ var datum = Date.parse(strDate);
+ return datum/1000;
+}
+
+function geocodeStart(address) {
+  if(address) {
+      geocoder.geocode({'address': address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results[0]) {
-            infowindow.setContent(results[0].formatted_address);
-            infowindow.open(map, marker);
-            document.getElementById('start-box').value = results[0].formatted_address;
-            Session.set('start', results[0].formatted_address);
+            startCoordinates = results[0].geometry.location;
+            console.log(startCoordinates);
           } else {
             alert('No results found');
           }
@@ -95,20 +84,15 @@ function calculateAndDisplayRoute() {
         }
       });
     }
-}*/
+}
 
-
-/*function geocodeLatLng(map, position) {
-  if(position) {
-      var latlng = {lat: position.lat, lng: position.lng};
-      geocoder.geocode({'location': latlng}, function(results, status) {
+function geocodeEnd(address) {
+  if(address) {
+      geocoder.geocode({'address': address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results[0]) {
-            infowindow.setContent(results[0].formatted_address);
-            infowindow.open(map, marker);
-            Session.set('end', results[0].formatted_address);
-            document.getElementById('end-box').value = results[0].formatted_address;
-            calculateAndDisplayRoute();
+            endCoordinates = results[0].geometry.location;
+            console.log(endCoordinates);
           } else {
             alert('No results found');
           }
@@ -117,7 +101,7 @@ function calculateAndDisplayRoute() {
         }
       });
     }
-}*/
+}
 
 Template.newPool.helpers({
   exampleMapOptions: function() {
@@ -134,58 +118,75 @@ Template.newPool.helpers({
 
 Template.newPool.onRendered(function() {
   this.$('.datetimepicker').datetimepicker();
+  $('.ui.fluid.selection.dropdown')
+  .dropdown()
+  ;
 });
 
 
 Template.newPool.events({
   'submit form': function(e) {
     e.preventDefault();
+    var user = Meteor.user();
     var startLocation = document.getElementById('start-box').value;
     var endLocation = document.getElementById('end-box').value;
-    var numberOfPersons = document.getElementById('people-box').value;
     var time = document.getElementById('date-box').value;
-    var accomodateMore = $('#more-box').is(':checked');
+    var vehicle = document.getElementById('vehicle-box').value;
+    var distance = document.getElementById('distance-box').value;
+    var time_taken = document.getElementById('duration-box').value;
     var pool = {
-      start: startLocation,
-      end: endLocation,
-      numberOfPersons: numberOfPersons,
-      people: [Meteor.userId()],
-      time: time,
-      more: accomodateMore,
-      author: Meteor.userId()
+      source: startLocation,
+      destination: endLocation,
+      time: toTimestamp(time),
+      vehicle_type: vehicle,
+      customer_id: user.services.google.accessToken,
+      source_lat: startCoordinates.lat(),
+      source_lng: startCoordinates.lng(),
+      destination_lat: endCoordinates.lat(),
+      destination_lng: endCoordinates.lng(),
+      distance: distance,
+      time_taken: time_taken
     }
     var errors = validatePost(pool);
-    if (errors.start || errors.end || errors.numberOfPersons || errors.time) {
+    if (errors.source || errors.destination || errors.vehicle_type || errors.time) {
       return;
     }
-    Meteor.call('poolInsert', pool, function(err, res) {
-      if(err) {
-        console.log(err);
-      }
-      else {
-        Router.go('poolPage', {_id: res});
-      }
+    var info = {
+      distance: distance,
+      type: vehicle
+    };
+    var extractBase = 'http://128.199.206.145/vigo/v1/bulkFare';
+    HTTP.call( 'POST', extractBase, {
+      params: info
+      }, function(err, resp) {
+        console.log(resp.data);
+        return resp.data;
     });
-
-    Router.go('home');
+    /*Meteor.call('bulkFare', info, function(res) {
+      console.log(res);
+    });
+    Meteor.call('book', pool, function(res) {
+      console.log(res);
+    });*/
+    return;
   },
   'change .startBox': function(e) {
     e.preventDefault();
-    console.log('1 length: ' + input1.value.length);
-    console.log('2 length: ' + input2.value.length);
     if(input1.value.length === 0 || input2.value.length === 0)
       return;
     $('#new-pool-loader').addClass('active');
+    geocodeStart(input1.value);
+    geocodeEnd(input2.value);
     calculateAndDisplayRoute();
 
   },
   'change .endBox': function(e) {
     e.preventDefault();
-    console.log('1 length: ' + input1.value.length);
-    console.log('2 length: ' + input2.value.length);
     if(input1.value.length === 0 || input2.value.length === 0)
       return;
     $('#new-pool-loader').addClass('active');
+    geocodeStart(input1.value);
+    geocodeEnd(input2.value);
     calculateAndDisplayRoute();
   }
 });
@@ -193,13 +194,18 @@ Template.newPool.events({
 validatePost = function (pool) {
   var errors = {};
 
-  if (!pool.end) {
-    errors.end = "No Travel Desitnation";
+  if (!pool.source) {
+    errors.source = "No Travel Desitnation";
     $('#end-field').addClass('error');
   }
 
-  if (!pool.start) {
-    errors.start =  "No Starting Location";
+  if(!pool.vehicle_type) {
+    errors.vehicle_type = "Please choose Vehicle";
+    $('#vehicle-field').addClass('error');
+  }
+
+  if (!pool.destination) {
+    errors.destination =  "No Starting Location";
     $('#start-field').addClass('error');
   }
 
@@ -207,11 +213,5 @@ validatePost = function (pool) {
     errors.time = "No Travel Time";
     $('#date-field').addClass('error');
   }
-
-  if(!pool.numberOfPersons) {
-    errors.location = "Please specify the number of people";
-    $('#people-field').addClass('error');
-  }
-
   return errors;
 }

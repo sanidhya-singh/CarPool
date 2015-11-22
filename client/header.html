@@ -4,24 +4,24 @@
       <div class='ui sixteen wide column'>
         <div class='ui horizontal divider'>
         </div>
-      <div class="ui large menu">
+      <div class="ui large inverted yellow menu">
       <div class="header item">
-        <a href="{{pathFor 'home'}}">
+        <a href="{{pathFor 'home'}}" style='color: #2C3E50'>
           <i class='car icon'></i>
           ViGo
         </a>
       </div>
       {{#if currentUser}}
-        <a class='item' href="{{pathFor 'newPool'}}">
+        <a class='item' href="{{pathFor 'newPool'}}" style='color: #2C3E50'>
           <i class='fitted plus icon'></i>
         </a>
       {{/if}}
       <div class='right menu'>
-        <a class="item" href="{{pathFor 'poolList'}}">
+        <a class="item" href="{{pathFor 'poolList'}}" style='color: #2C3E50'>
           Pools
         </a>
       {{#if currentUser}}
-        <a class='item' href="{{pathFor 'profilePage'}}">
+        <a class='item' href="{{pathFor 'profilePage'}}" style='color: #2C3E50'>
           Profile
           {{#if requestCount}}
             <div class='floating ui red label'>
@@ -30,7 +30,7 @@
           {{/if}}
         </a>
       {{/if}}
-        <a class='center aligned item toggleSidebar'>
+        <a class='center aligned item toggleSidebar' style='color: #2C3E50'>
           <i class='sidebar icon'></i>
         </a>
         {{> loginButtons}}
@@ -39,8 +39,8 @@
     </div>
     </div>
     <div class='mobile only row'>
-      <div class='ui fixed menu navbar page grid'>
-        <a class="header item toggleSidebar">
+      <div class='ui fixed inverted yellow menu navbar page grid'>
+        <a class="header item toggleSidebar" style='color: #2C3E50'>
           <i class='sidebar icon'></i>
             ViGo
             {{#if requestCount}}
@@ -49,7 +49,7 @@
               </label>
             {{/if}}
         </a>
-        <div class='right menu'>
+        <div class='right menu' style='color: #2C3E50'>
           {{> loginButtons}}
         </div>
       </div>

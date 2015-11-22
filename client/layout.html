@@ -38,9 +38,20 @@
       <div class='ui container'>
           {{> header}}
           <div class='ui basic segment'>
-            {{> yield}}
+            {{#if currentUser}}
+              {{#if currentUser.profile.otp}}
+                {{> yield}}
+              {{else}}
+                {{> otp}}
+              {{/if}}
+            {{else}}
+              {{> yield}}
+            {{/if}}
           </div>
       </div>
+      <div class='ui hidden section divider'></div>
+      <div class='ui hidden section divider'></div>
+      <div class='ui hidden section divider'></div>
       <div class='ui section divider'></div>
       <div class='ui inverted blue basic segment'>
         <h4 class='ui center aligned inverted yellow header'>
